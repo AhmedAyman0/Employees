@@ -19,8 +19,8 @@ namespace SETechnicalTask.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
-                    Email = table.Column<string>(nullable: false)
+                    Name = table.Column<string>(maxLength: 15, nullable: false),
+                    Email = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -40,7 +40,7 @@ namespace SETechnicalTask.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EmployeeSkill",
+                name: "EmployeeSkills",
                 columns: table => new
                 {
                     EmpId = table.Column<int>(nullable: false),
@@ -48,15 +48,15 @@ namespace SETechnicalTask.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmployeeSkill", x => new { x.SkillId, x.EmpId });
+                    table.PrimaryKey("PK_EmployeeSkills", x => new { x.SkillId, x.EmpId });
                     table.ForeignKey(
-                        name: "FK_EmployeeSkill_Employees_EmpId",
+                        name: "FK_EmployeeSkills_Employees_EmpId",
                         column: x => x.EmpId,
                         principalTable: "Employees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EmployeeSkill_Skills_SkillId",
+                        name: "FK_EmployeeSkills_Skills_SkillId",
                         column: x => x.SkillId,
                         principalTable: "Skills",
                         principalColumn: "Id",
@@ -75,15 +75,15 @@ namespace SETechnicalTask.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmployeeSkill_EmpId",
-                table: "EmployeeSkill",
+                name: "IX_EmployeeSkills_EmpId",
+                table: "EmployeeSkills",
                 column: "EmpId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "EmployeeSkill");
+                name: "EmployeeSkills");
 
             migrationBuilder.DropTable(
                 name: "Employees");

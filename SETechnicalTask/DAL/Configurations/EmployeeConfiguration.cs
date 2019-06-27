@@ -14,8 +14,9 @@ namespace DAL.Configurations
             builder.ToTable("Employees");
             builder.HasKey(a => a.Id);
             builder.Property(a => a.Id).ForSqlServerUseSequenceHiLo("EmpSeq");
-            builder.Property(a => a.Name).IsRequired(true);
-            builder.Property(a => a.Email).IsRequired(true);
+            builder.Property(a => a.Name).HasMaxLength(15).IsRequired(true);
+            builder.Property(a => a.Email).IsRequired(false);
+            
         }
     }
 }

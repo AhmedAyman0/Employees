@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Common.Extensions;
+using Common.Validations;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,10 +37,10 @@ namespace SETechnicalTask
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                     .AddJsonOptions(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
-                    .AddFluentValidation();
+                    .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Common.Validations.EmployeeValidation>());
             services.ConfigureSqlContext(Configuration.GetConnectionString("Conn"));
             services.ConfigureValidations();
-
+            services.ConfigureServices();
 
         }
 
@@ -60,7 +61,7 @@ namespace SETechnicalTask
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

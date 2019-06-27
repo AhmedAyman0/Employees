@@ -4,6 +4,8 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Services;
+using SETechnicalTask.Models;
+using SETechnicalTask.Services;
 
 namespace Common.Extensions
 {
@@ -15,13 +17,14 @@ namespace Common.Extensions
         }
         public static void ConfigureValidations(this IServiceCollection services)
         {
-            services.AddSingleton<IValidator, EmployeeValidation>();
-            services.AddSingleton<IValidator, SkillValidation>();
+            services.AddTransient<IValidator<Employee>, EmployeeValidation>();
+            services.AddTransient<IValidator<Skill>, SkillValidation>();
         }
 
         public static void ConfigureServices(this IServiceCollection services)
         {
             services.AddScoped<EmployeeService>();
+            services.AddScoped<SkillService>();
 
         }
     }

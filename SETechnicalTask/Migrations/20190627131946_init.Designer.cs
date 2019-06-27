@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace SETechnicalTask.Migrations
 {
     [DbContext(typeof(EmpContext))]
-    [Migration("20190627095538_init")]
+    [Migration("20190627131946_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,11 +29,11 @@ namespace SETechnicalTask.Migrations
                         .HasAnnotation("SqlServer:HiLoSequenceName", "EmpSeq")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
 
-                    b.Property<string>("Email")
-                        .IsRequired();
+                    b.Property<string>("Email");
 
                     b.Property<string>("Name")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(15);
 
                     b.HasKey("Id");
 
@@ -50,7 +50,7 @@ namespace SETechnicalTask.Migrations
 
                     b.HasIndex("EmpId");
 
-                    b.ToTable("EmployeeSkill");
+                    b.ToTable("EmployeeSkills");
                 });
 
             modelBuilder.Entity("SETechnicalTask.Models.Skill", b =>
