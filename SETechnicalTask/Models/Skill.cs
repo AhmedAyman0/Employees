@@ -9,6 +9,6 @@ namespace SETechnicalTask.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
+        public List<EmployeeSkill> SkillEmployees { get; set; }
     }
 }
