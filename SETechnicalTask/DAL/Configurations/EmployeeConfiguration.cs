@@ -16,10 +16,6 @@ namespace DAL.Configurations
             builder.Property(a => a.Id).ForSqlServerUseSequenceHiLo("EmpSeq");
             builder.Property(a => a.Name).IsRequired(true);
             builder.Property(a => a.Email).IsRequired(true);
-            //builder
-            //    .HasMany(a => a.Skills)
-            //    .WithOne(a => a.Employee)
-            //    .HasForeignKey(a => a.EmployeeId);
         }
     }
 }
